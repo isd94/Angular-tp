@@ -1,0 +1,189 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: api-rest
+  description: My cool app
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Talents
+    description: Simple talents endpoints
+  - name: Ecoles
+    description: Simple ecoles endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  ExampleBody:
+    type: object
+    title: example
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: no_stress
+  TalentBody:
+    type: object
+    title: talent
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: prenom
+      prenom:
+        type: string
+        example: no_stress
+      ecole:
+        type: string
+        example: edacy
+      adress:
+        type: string
+        example: dakar
+      telephone:
+        type: string
+        example: 1111111
+  EcoleBody:
+    type: object
+    title: ecole
+    proprieties:
+      name:
+        type: string
+        exemple: esp
+      description:
+        type: string
+        exemple: esp est un ecole d'enseigneur
+        
+
+paths:
+  /examples:
+    get:
+      tags:
+        - Examples
+      description: Fetch all examples
+      responses:
+        200:
+          description: Returns all examples
+    post:
+      tags:
+        - Examples
+      description: Create a new example
+      parameters:
+        - name: example
+          in: body
+          description: an example
+          required: true
+          schema: 
+            $ref: "#/definitions/ExampleBody"
+      responses:
+        200:
+          description: Returns all examples
+
+  /examples/{id}:
+    get:
+      tags:
+        - Examples
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the example to retrieve
+          type: integer
+      responses:
+        200:
+          description: Return the example with the specified id
+        404:
+          description: Example not found
+  /talents:
+    get:
+      tags:
+        - Talents
+      description: Fetch all talents
+      responses:
+        200:
+          description: Returns all talents
+    post:
+      tags:
+        - Talents
+      description: Create a new talents
+      parameters:
+        - name: talent
+          in: body
+          description: an talent
+          required: true
+          schema: 
+            $ref: "#/definitions/TalentBody"
+      responses:
+        200:
+          description: Returns all talents
+
+  /talents/{id}:
+    get:
+      tags:
+        - Talents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the talent to retrieve
+          type: integer
+      responses:
+        200:
+          description: Return the talent with the specified id
+        404:
+          description: Talent not found
+
+  /ecoles:
+    get:
+      tags:
+        - Ecoles
+      description: Fetch all ecoles
+      responses:
+        200:
+          description: Returns all ecoles
+    post:
+      tags:
+        - Ecoles
+      description: Create a new ecoles
+      parameters:
+        - name: ecole
+          in: body
+          description: an ecole
+          required: true
+          schema: 
+            $ref: "#/definitions/EcoleBody"
+      responses:
+        200:
+          description: Returns all eco;es
+
+  /ecoles/{id}:
+    get:
+      tags:
+        - Ecoles
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the ecole to retrieve
+          type: integer
+      responses:
+        200:
+          description: Return the ecole with the specified id
+        404:
+          description: Ecole not found
+
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
